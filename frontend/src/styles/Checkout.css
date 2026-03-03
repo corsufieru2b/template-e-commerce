@@ -1,0 +1,116 @@
+/**
+ * CHECKOUT PAGE STYLES
+ */
+
+.checkout-page {
+  min-height: 80vh;
+  padding: var(--spacing-lg) 0;
+}
+
+.checkout-page h1 {
+  margin-bottom: var(--spacing-xl);
+}
+
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: var(--spacing-lg);
+}
+
+.checkout-form {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.checkout-form h2 {
+  margin-bottom: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.checkout-form h2:first-child {
+  margin-top: 0;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.payment-methods label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  cursor: pointer;
+}
+
+.payment-note {
+  background-color: var(--light);
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  font-size: 14px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.btn-submit {
+  width: 100%;
+}
+
+.checkout-summary {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.checkout-summary h2 {
+  margin-bottom: var(--spacing-lg);
+  font-size: 18px;
+}
+
+.summary-items {
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--spacing-lg);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.summary-breakdown {
+  margin-bottom: var(--spacing-lg);
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.breakdown-row.total {
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    position: static;
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "premium-ecommerce-template",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Premium E-commerce Template - Resalable White Label Solution",
+  "main": "backend/src/index.js",
+  "scripts": {
+    "install-all": "npm install && npm --workspace=frontend install && npm --workspace=backend install",
+    "dev": "concurrently \"npm --workspace=frontend run dev\" \"npm --workspace=backend run dev\"",
+    "build": "npm --workspace=frontend run build && npm --workspace=backend run build",
+    "start": "npm --workspace=backend start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecommerce",
+    "template",
+    "react",
+    "express",
+    "MongoDB",
+    "white-label",
+    "resale"
+  ],
+  "author": "Your Digital Agency",
+  "license": "PROPRIETARY",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

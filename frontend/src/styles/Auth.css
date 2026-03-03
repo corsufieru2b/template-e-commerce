@@ -1,0 +1,64 @@
+/**
+ * AUTHENTICATION PAGES STYLES
+ */
+
+.auth-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.auth-form {
+  background: white;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-form h1 {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.auth-form form {
+  margin-bottom: var(--spacing-lg);
+}
+
+.auth-form button[type="submit"] {
+  width: 100%;
+}
+
+.auth-form p {
+  text-align: center;
+  color: var(--text-light);
+}
+
+.auth-form a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+  .auth-form {
+    padding: var(--spacing-lg);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

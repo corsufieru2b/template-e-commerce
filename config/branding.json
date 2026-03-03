@@ -1,0 +1,96 @@
+{
+  "storeName": "Premium Store",
+  "storeName_subtitle": "La qualité au meilleur prix",
+  "logo": "/images/logo.png",
+  "favicon": "/images/favicon.ico",
+  "colors": {
+    "primary": "#FF6B6B",
+    "secondary": "#2D3436",
+    "accent": "#00B894",
+    "success": "#27AE60",
+    "error": "#E74C3C",
+    "warning": "#F39C12",
+    "info": "#3498DB",
+    "light": "#ECF0F1",
+    "dark": "#2C3E50",
+    "text": "#2D3436",
+    "textLight": "#636E72",
+    "border": "#DFE6E9",
+    "background": "#FFFFFF"
+  },
+  "typography": {
+    "fontFamily": "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    "fontSize": {
+      "xs": "12px",
+      "sm": "14px",
+      "base": "16px",
+      "lg": "18px",
+      "xl": "20px",
+      "2xl": "24px",
+      "3xl": "30px"
+    },
+    "fontWeight": {
+      "light": 300,
+      "normal": 400,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "2xl": "48px"
+  },
+  "breakpoints": {
+    "mobile": "480px",
+    "tablet": "768px",
+    "desktop": "1024px",
+    "wide": "1440px"
+  },
+  "contact": {
+    "email": "contact@premium-store.com",
+    "phone": "+33 1 23 45 67 89",
+    "address": "123 Rue de la Paix, 75000 Paris",
+    "city": "Paris",
+    "country": "France"
+  },
+  "social": {
+    "facebook": "https://facebook.com/premiumstore",
+    "instagram": "https://instagram.com/premiumstore",
+    "twitter": "https://twitter.com/premiumstore",
+    "youtube": "https://youtube.com/premiumstore"
+  },
+  "shipping": {
+    "defaultCost": 9.99,
+    "freeShippingThreshold": 100,
+    "currency": "EUR",
+    "rates": [
+      {
+        "name": "Standard (5-7 jours)",
+        "price": 9.99
+      },
+      {
+        "name": "Express (2-3 jours)",
+        "price": 19.99
+      },
+      {
+        "name": "Urgent (24h)",
+        "price": 39.99
+      }
+    ]
+  },
+  "payment": {
+    "methods": ["credit_card", "paypal", "bank_transfer"],
+    "currency": "EUR",
+    "taxRate": 0.20
+  },
+  "companyInfo": {
+    "siret": "123 456 789 00000",
+    "siren": "123 456 789",
+    "vat_number": "FR12345678900",
+    "rgpd_email": "privacy@premium-store.com"
+  }
+}
