@@ -1,0 +1,29 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Sac a dos urbain impermeable</title>
+  <desc id="desc">Illustration produit d'un sac a dos moderne.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4f8f7"/>
+      <stop offset="100%" stop-color="#dbeee9"/>
+    </linearGradient>
+    <linearGradient id="bag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a4e49"/>
+      <stop offset="100%" stop-color="#1d3733"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="1050" cy="760" r="180" fill="#cbe7df" opacity="0.45"/>
+  <circle cx="140" cy="140" r="120" fill="#b9dfd4" opacity="0.35"/>
+
+  <g transform="translate(350,120)">
+    <rect x="90" y="115" width="220" height="480" rx="96" fill="url(#bag)"/>
+    <rect x="125" y="178" width="150" height="260" rx="62" fill="#1a302d"/>
+    <rect x="140" y="470" width="120" height="85" rx="30" fill="#355f58"/>
+    <path d="M145 110c0-60 40-95 55-95h0c15 0 55 35 55 95" fill="none" stroke="#233f3b" stroke-width="24" stroke-linecap="round"/>
+    <rect x="152" y="314" width="96" height="16" rx="8" fill="#9fd6c7"/>
+    <circle cx="198" cy="247" r="20" fill="#8ec9ba"/>
+    <rect x="152" y="227" width="94" height="10" rx="5" fill="#8ec9ba"/>
+  </g>
+
+  <text x="600" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#24574f">Sac a Dos Urbain</text>
+</svg>

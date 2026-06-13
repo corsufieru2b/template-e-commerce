@@ -1,0 +1,30 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Montre connectee multisports</title>
+  <desc id="desc">Illustration produit d'une montre connectee.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5f6fa"/>
+      <stop offset="100%" stop-color="#dfe5f2"/>
+    </linearGradient>
+    <linearGradient id="watch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2f3442"/>
+      <stop offset="100%" stop-color="#232833"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="1000" cy="180" r="140" fill="#c6d0eb" opacity="0.35"/>
+  <circle cx="170" cy="760" r="170" fill="#cad4ec" opacity="0.35"/>
+
+  <g transform="translate(360,120)">
+    <rect x="170" y="0" width="140" height="150" rx="55" fill="#30374a"/>
+    <rect x="170" y="510" width="140" height="150" rx="55" fill="#30374a"/>
+    <rect x="70" y="120" width="340" height="430" rx="78" fill="url(#watch)"/>
+    <rect x="112" y="168" width="256" height="334" rx="36" fill="#f6f8ff"/>
+    <circle cx="240" cy="258" r="52" fill="#c8d8fb"/>
+    <rect x="168" y="342" width="144" height="14" rx="7" fill="#c8d8fb"/>
+    <rect x="146" y="376" width="188" height="18" rx="9" fill="#d6e1fb"/>
+    <text x="240" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2a3854">SPORT</text>
+  </g>
+
+  <text x="600" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#2c3958">Montre Connectee</text>
+</svg>

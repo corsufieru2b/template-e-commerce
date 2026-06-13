@@ -20,7 +20,7 @@ export const mockProducts = [
     createdAt: new Date().toISOString(),
     ratings: { average: 4.6, count: 89 },
     images: [
-      { url: '/images/products/sample-tshirt.svg', alt: 'Produit premium' }
+      { url: '/images/products/wireless-headphones.svg', alt: 'Casque audio sans fil premium' }
     ],
     specifications: [
       { key: 'Autonomie', value: '30 heures' },
@@ -41,7 +41,7 @@ export const mockProducts = [
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10).toISOString(),
     ratings: { average: 4.4, count: 44 },
     images: [
-      { url: '/images/products/sample-mug.svg', alt: 'Produit maison premium' }
+      { url: '/images/products/urban-backpack.svg', alt: 'Sac a dos urbain impermeable' }
     ],
     specifications: [
       { key: 'Capacité', value: '20L' },
@@ -64,7 +64,7 @@ export const mockProducts = [
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 45).toISOString(),
     ratings: { average: 4.2, count: 57 },
     images: [
-      { url: '/images/products/placeholder-product.svg', alt: 'Produit sport premium' }
+      { url: '/images/products/smartwatch.svg', alt: 'Montre connectee multisports' }
     ],
     specifications: [
       { key: 'Autonomie', value: '12 jours' },
