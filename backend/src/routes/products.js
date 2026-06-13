@@ -24,7 +24,15 @@ const router = express.Router();
  */
 router.get('/', async (req, res, next) => {
   try {
-    const { category, priceMin, priceMax, page = 1, limit = 12, sort = '-createdAt' } = req.query;
+    const {
+      category,
+      priceMin,
+      priceMax,
+      q,
+      page = 1,
+      limit = 12,
+      sort = 'newest'
+    } = req.query;
 
     // Construire le filtre
     const filter = { isActive: true };
@@ -39,13 +47,28 @@ router.get('/', async (req, res, next) => {
       if (priceMax) filter.price.$lte = parseFloat(priceMax);
     }
 
+    if (q && String(q).trim().length >= 2) {
+      filter.$text = { $search: String(q).trim() };
+    }
+
+    const sortMap = {
+      newest: { createdAt: -1 },
+      oldest: { createdAt: 1 },
+      price_asc: { price: 1 },
+      price_desc: { price: -1 },
+      rating_desc: { 'ratings.average': -1 },
+      best_sellers: { isFeatured: -1, 'ratings.count': -1 }
+    };
+
+    const safeSort = sortMap[sort] || sortMap.newest;
+
     // Pagination
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
     // Requête
     const products = await Product
       .find(filter)
-      .sort(sort)
+      .sort(safeSort)
       .skip(skip)
       .limit(parseInt(limit))
       .select('-specifications -seoKeywords'); // Exclure les champs volumineux

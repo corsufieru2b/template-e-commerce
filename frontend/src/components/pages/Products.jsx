@@ -19,6 +19,8 @@ const Products = () => {
   const [category, setCategory] = useState('');
   const [priceMin, setPriceMin] = useState('');
   const [priceMax, setPriceMax] = useState('');
+  const [search, setSearch] = useState('');
+  const [sort, setSort] = useState('newest');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -31,6 +33,8 @@ const Products = () => {
           category: category || undefined,
           priceMin: priceMin || undefined,
           priceMax: priceMax || undefined,
+          q: search?.trim() || undefined,
+          sort,
           page,
           limit: 12
         };
@@ -54,7 +58,7 @@ const Products = () => {
     };
 
     fetchProducts();
-  }, [category, priceMin, priceMax, page]);
+  }, [category, priceMin, priceMax, search, sort, page]);
 
   const handleFilterChange = () => {
     setPage(1);
@@ -69,6 +73,19 @@ const Products = () => {
           {/* Filtres */}
           <aside className="filters">
             <h3>Filtres</h3>
+
+            <div className="filter-group">
+              <label>Recherche</label>
+              <input
+                type="search"
+                placeholder="Nom ou description"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  handleFilterChange();
+                }}
+              />
+            </div>
 
             <div className="filter-group">
               <label>Catégorie</label>
@@ -108,6 +125,23 @@ const Products = () => {
                   handleFilterChange();
                 }}
               />
+            </div>
+
+            <div className="filter-group">
+              <label>Trier par</label>
+              <select
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value);
+                  handleFilterChange();
+                }}
+              >
+                <option value="newest">Plus recents</option>
+                <option value="price_asc">Prix croissant</option>
+                <option value="price_desc">Prix decroissant</option>
+                <option value="rating_desc">Mieux notes</option>
+                <option value="best_sellers">Best sellers</option>
+              </select>
             </div>
           </aside>
 

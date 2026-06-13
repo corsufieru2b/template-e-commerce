@@ -22,6 +22,8 @@ import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
 import orderRoutes from './routes/orders.js';
 import adminRoutes from './routes/admin.js';
+import paymentRoutes from './routes/payments.js';
+import contactRoutes from './routes/contact.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { requestLogger } from './middleware/logger.js';
 
@@ -70,6 +72,8 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Routes admin (protégées)
 app.use('/api/admin', adminRoutes);

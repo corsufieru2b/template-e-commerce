@@ -9,7 +9,9 @@
 import express from 'express';
 import Order from '../models/Order.js';
 import Product from '../models/Product.js';
+import User from '../models/User.js';
 import { authMiddleware } from '../middleware/auth.js';
+import { sendEmail } from '../utils/mailer.js';
 
 const router = express.Router();
 
@@ -125,7 +127,7 @@ router.post('/', authMiddleware, async (req, res, next) => {
     const total = subtotal + taxAmount + shippingCost;
 
     // Récupérer l'utilisateur
-    const user = await require('../models/User.js').default.findById(req.user.userId);
+    const user = await User.findById(req.user.userId);
 
     // Générer numéro de commande
     const date = new Date();
@@ -164,6 +166,13 @@ router.post('/', authMiddleware, async (req, res, next) => {
         { $inc: { stock: -item.quantity } }
       );
     }
+
+    await sendEmail({
+      to: user.email,
+      subject: `Commande confirmee ${order.orderNumber}`,
+      text: `Merci pour votre commande ${order.orderNumber}. Montant: ${order.pricing.total.toFixed(2)} EUR.`,
+      html: `<p>Merci pour votre commande <strong>${order.orderNumber}</strong>.</p><p>Montant total: <strong>${order.pricing.total.toFixed(2)} EUR</strong>.</p>`
+    });
 
     res.status(201).json({
       message: 'Commande créée avec succès',

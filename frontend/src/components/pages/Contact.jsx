@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import brandingConfig from '../../config/branding.json';
+import { apiClient } from '../../utils/apiClient';
 import '../../styles/Contact.css';
 
 const initialForm = {
@@ -14,6 +15,8 @@ const initialForm = {
 const Contact = () => {
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,10 +26,21 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm(initialForm);
+    setLoading(true);
+    setError('');
+    setSubmitted(false);
+
+    try {
+      await apiClient.sendContactMessage(form);
+      setSubmitted(true);
+      setForm(initialForm);
+    } catch (err) {
+      setError(err.message || 'Impossible d envoyer le message pour le moment');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,6 +85,7 @@ const Contact = () => {
                 Message envoye. Nous revenons vers vous rapidement.
               </p>
             )}
+            {error && <p className="error-message">{error}</p>}
 
             <form onSubmit={handleSubmit}>
               <div className="contact-form__row">
@@ -111,7 +126,9 @@ const Contact = () => {
                 J'accepte que mes donnees soient utilisees uniquement pour traiter ma demande.
               </label>
 
-              <button type="submit" className="btn btn-primary">Envoyer</button>
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? 'Envoi...' : 'Envoyer'}
+              </button>
             </form>
           </section>
         </div>

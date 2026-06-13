@@ -86,6 +86,27 @@ export const apiClient = {
       body: JSON.stringify(orderData)
     }).then(handleResponse),
 
+  createStripeCheckoutSession: (payload) =>
+    fetch(`${API_URL}/api/payments/stripe/checkout-session`, {
+      method: 'POST',
+      headers: getHeaders(true),
+      body: JSON.stringify(payload)
+    }).then(handleResponse),
+
+  confirmStripeOrder: (orderId, sessionId) =>
+    fetch(`${API_URL}/api/payments/stripe/confirm`, {
+      method: 'POST',
+      headers: getHeaders(true),
+      body: JSON.stringify({ orderId, sessionId })
+    }).then(handleResponse),
+
+  sendContactMessage: (payload) =>
+    fetch(`${API_URL}/api/contact`, {
+      method: 'POST',
+      headers: getHeaders(false),
+      body: JSON.stringify(payload)
+    }).then(handleResponse),
+
   // ADMIN
   getAdminStats: () =>
     fetch(`${API_URL}/api/admin/stats`, {

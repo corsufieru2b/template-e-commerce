@@ -74,6 +74,17 @@ const orderSchema = new mongoose.Schema({
     default: 'pending'
   },
 
+  paymentProvider: {
+    type: String,
+    enum: ['none', 'stripe', 'paypal', 'bank_transfer'],
+    default: 'none'
+  },
+
+  paymentSessionId: {
+    type: String,
+    default: null
+  },
+
   status: {
     type: String,
     enum: ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'],
@@ -93,6 +104,11 @@ const orderSchema = new mongoose.Schema({
     default: Date.now
   }
 }, { timestamps: true });
+
+orderSchema.index({ 'customer.userId': 1, createdAt: -1 });
+orderSchema.index({ status: 1, createdAt: -1 });
+orderSchema.index({ paymentStatus: 1, createdAt: -1 });
+orderSchema.index({ paymentSessionId: 1 }, { sparse: true });
 
 const Order = mongoose.model('Order', orderSchema);
 

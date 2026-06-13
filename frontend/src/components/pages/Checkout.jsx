@@ -71,6 +71,20 @@ const Checkout = () => {
         paymentMethod
       };
 
+      if (paymentMethod === 'credit_card') {
+        const paymentSession = await apiClient.createStripeCheckoutSession({
+          items: orderData.items,
+          shippingAddress: orderData.shippingAddress
+        });
+
+        if (!paymentSession.checkoutUrl) {
+          throw new Error('Impossible d initialiser le paiement Stripe');
+        }
+
+        window.location.href = paymentSession.checkoutUrl;
+        return;
+      }
+
       const response = await apiClient.createOrder(orderData);
       localStorage.setItem('lastOrder', JSON.stringify(response.order));
       clearCart();
