@@ -41,6 +41,10 @@ const orderSchema = new mongoose.Schema({
       required: true,
       min: 1
     },
+    selectedOptions: {
+      type: Object,
+      default: null
+    },
     subtotal: Number
   }],
 

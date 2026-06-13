@@ -1,0 +1,130 @@
+/**
+ * CONTACT PAGE STYLES
+ */
+
+.contact-page {
+  min-height: 80vh;
+  padding: var(--spacing-xl) 0;
+}
+
+.contact-page__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.contact-page__header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.contact-page__title {
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  margin-bottom: var(--spacing-sm);
+  color: var(--secondary-color);
+}
+
+.contact-page__subtitle {
+  color: var(--text-light);
+}
+
+.contact-page__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.contact-card,
+.contact-form {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: var(--spacing-lg);
+}
+
+.contact-card h2,
+.contact-form h2 {
+  margin-bottom: var(--spacing-md);
+  color: var(--secondary-color);
+}
+
+.contact-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.contact-card__label {
+  display: block;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.contact-card__value {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.contact-card__trust {
+  margin-top: var(--spacing-lg);
+  border-top: 1px solid var(--border);
+  padding-top: var(--spacing-md);
+  display: grid;
+  gap: var(--spacing-sm);
+  color: var(--text-light);
+}
+
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.contact-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.contact-form__consent input {
+  margin-top: 4px;
+  width: auto;
+}
+
+.contact-form__success {
+  background: #eafaf2;
+  color: var(--success);
+  border-radius: var(--radius);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 860px) {
+  .contact-page__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-page {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .contact-page__container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .contact-card,
+  .contact-form {
+    padding: var(--spacing-md);
+  }
+
+  .contact-form__row {
+    grid-template-columns: 1fr;
+  }
+}

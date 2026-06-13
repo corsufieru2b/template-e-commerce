@@ -1,0 +1,117 @@
+/**
+ * ORDER CONFIRMATION STYLES
+ */
+
+.order-confirmation {
+  min-height: 80vh;
+  padding: var(--spacing-xl) 0;
+}
+
+.order-confirmation__container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.order-confirmation__card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: var(--spacing-lg);
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.order-confirmation__status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.order-confirmation__badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #eafaf2;
+  color: var(--success);
+  font-weight: 700;
+}
+
+.order-confirmation__title {
+  margin: 0;
+  color: var(--secondary-color);
+}
+
+.order-confirmation__subtitle {
+  margin: 0;
+  color: var(--text-light);
+}
+
+.order-confirmation__summary {
+  background: var(--light);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.order-confirmation__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: var(--spacing-sm);
+}
+
+.order-confirmation__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.order-confirmation__next h2 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.order-confirmation__next ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.order-confirmation__next li {
+  color: var(--text-light);
+  padding-left: 18px;
+  position: relative;
+}
+
+.order-confirmation__next li::before {
+  content: '•';
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+}
+
+.order-confirmation__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 640px) {
+  .order-confirmation {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .order-confirmation__container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .order-confirmation__card {
+    padding: var(--spacing-md);
+  }
+}

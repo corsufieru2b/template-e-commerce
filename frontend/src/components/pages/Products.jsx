@@ -8,8 +8,9 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { apiClient } from '../../utils/apiClient';
+import ProductCard from '../common/ProductCard';
+import { mockProducts } from '../../data/mockProducts';
 import '../../styles/Products.css';
 
 const Products = () => {
@@ -24,6 +25,7 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
+
       try {
         const filters = {
           category: category || undefined,
@@ -35,7 +37,7 @@ const Products = () => {
 
         // Nettoyer les valeurs undefined
         Object.keys(filters).forEach(
-          key => filters[key] === undefined && delete filters[key]
+          (key) => filters[key] === undefined && delete filters[key]
         );
 
         const data = await apiClient.getProducts(filters);
@@ -43,6 +45,9 @@ const Products = () => {
         setTotalPages(data.pagination.pages);
       } catch (error) {
         console.error('Erreur:', error);
+        // Si l'API est indisponible, on utilise un jeu de données local pour développement
+        setProducts(mockProducts);
+        setTotalPages(1);
       } finally {
         setLoading(false);
       }
@@ -116,18 +121,7 @@ const Products = () => {
               <>
                 <div className="products-grid">
                   {products.map((product) => (
-                    <Link
-                      key={product._id}
-                      to={`/products/${product._id}`}
-                      className="product-card"
-                    >
-                      <img
-                        src={product.images?.[0]?.url || '/placeholder.png'}
-                        alt={product.name}
-                      />
-                      <h3>{product.name}</h3>
-                      <p className="price">{product.price?.toFixed(2)} €</p>
-                    </Link>
+                    <ProductCard key={product._id} product={product} to={`/products/${product._id}`} />
                   ))}
                 </div>
 

@@ -1,0 +1,93 @@
+/**
+ * INFO PAGES STYLES
+ *
+ * Utilise une structure commune pour les pages legales et de confiance.
+ */
+
+.info-page {
+  min-height: 80vh;
+  padding: var(--spacing-xl) 0;
+}
+
+.info-page__container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.info-page__header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.info-page__title {
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  color: var(--secondary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-page__intro {
+  color: var(--text-light);
+  max-width: 760px;
+}
+
+.info-page__card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: var(--spacing-lg);
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.info-page__section h2 {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--secondary-color);
+}
+
+.info-page__section p {
+  color: var(--text-light);
+}
+
+.info-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.info-page__list li {
+  color: var(--text-light);
+  padding-left: 18px;
+  position: relative;
+}
+
+.info-page__list li::before {
+  content: '•';
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+}
+
+.info-page__actions {
+  margin-top: var(--spacing-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 640px) {
+  .info-page {
+    padding: var(--spacing-lg) 0;
+  }
+
+  .info-page__container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .info-page__card {
+    padding: var(--spacing-md);
+  }
+}

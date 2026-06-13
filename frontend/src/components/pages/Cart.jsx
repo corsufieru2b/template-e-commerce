@@ -10,11 +10,18 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import brandingConfig from '../../config/branding.json';
 import '../../styles/Cart.css';
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, getTotal, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
+  const subtotal = Number(getTotal());
+  const freeShippingThreshold = brandingConfig.shipping?.freeShippingThreshold || 100;
+  const defaultShipping = brandingConfig.shipping?.defaultCost || 9.99;
+  const shippingCost = subtotal >= freeShippingThreshold ? 0 : defaultShipping;
+  const taxAmount = subtotal * 0.2;
+  const totalWithTaxAndShipping = subtotal + taxAmount + shippingCost;
 
   if (items.length === 0) {
     return (
@@ -56,7 +63,7 @@ const Cart = () => {
               </thead>
               <tbody>
                 {items.map((item) => (
-                  <tr key={item.productId}>
+                  <tr key={item.itemKey || item.productId}>
                     <td>
                       <div className="item-name">
                         {item.image && <img src={item.image} alt={item.name} />}
@@ -65,55 +72,74 @@ const Cart = () => {
                     </td>
                     <td>{item.price?.toFixed(2)} €</td>
                     <td>
-                      <input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        onChange={(e) => updateQuantity(item.productId, parseInt(e.target.value) || 1)}
-                      />
+                      <div className="cart-qty-control">
+                        <button type="button" onClick={() => updateQuantity(item.itemKey || item.productId, item.quantity - 1)}>-</button>
+                        <input
+                          type="number"
+                          min="1"
+                          value={item.quantity}
+                          onChange={(e) => updateQuantity(item.itemKey || item.productId, parseInt(e.target.value, 10) || 1)}
+                        />
+                        <button type="button" onClick={() => updateQuantity(item.itemKey || item.productId, item.quantity + 1)}>+</button>
+                      </div>
                     </td>
                     <td>{(item.price * item.quantity)?.toFixed(2)} €</td>
                     <td>
                       <button
-                        onClick={() => removeFromCart(item.productId)}
+                        onClick={() => removeFromCart(item.itemKey || item.productId)}
                         className="btn-remove"
                       >
-                        ❌
+                        Supprimer
                       </button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+
+            <div className="cart-items-actions">
+              <button type="button" className="btn btn-secondary" onClick={clearCart}>
+                Vider le panier
+              </button>
+            </div>
           </div>
 
           {/* Summary */}
           <div className="cart-summary">
             <h2>Résumé</h2>
+            <p className="shipping-helper">
+              Livraison {shippingCost === 0 ? 'offerte' : `offerte des ${freeShippingThreshold.toFixed(2)} €`}
+            </p>
             <div className="summary-row">
               <span>Sous-total</span>
-              <span>{getTotal()} €</span>
+              <span>{subtotal.toFixed(2)} €</span>
             </div>
             <div className="summary-row">
               <span>Frais de port</span>
-              <span>9.99 €</span>
+              <span>{shippingCost.toFixed(2)} €</span>
             </div>
             <div className="summary-row">
               <span>TVA (20%)</span>
-              <span>{(getTotal() * 0.2)?.toFixed(2)} €</span>
+              <span>{taxAmount.toFixed(2)} €</span>
             </div>
             <div className="summary-row total">
               <span>Total</span>
-              <span>{(parseFloat(getTotal()) * 1.2 + 9.99)?.toFixed(2)} €</span>
+              <span>{totalWithTaxAndShipping.toFixed(2)} €</span>
             </div>
 
             <button onClick={handleCheckout} className="btn btn-primary btn-checkout">
-              Procéder à la commande
+              Finaliser ma commande
             </button>
 
             <Link to="/products" className="btn btn-secondary">
               Continuer vos achats
             </Link>
+
+            <div className="cart-trust-points">
+              <p>Paiement securise</p>
+              <p>Retours sous 14 jours</p>
+              <p>Support client dedie</p>
+            </div>
           </div>
         </div>
       </div>

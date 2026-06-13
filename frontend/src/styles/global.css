@@ -20,7 +20,7 @@
   --error: #E74C3C;
   --warning: #F39C12;
 
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -42,7 +42,7 @@ html, body {
   height: 100%;
   font-family: var(--font-family);
   color: var(--text);
-  background-color: #ffffff;
+  background: radial-gradient(circle at 0% 0%, #ffffff 40%, #f8fbfa 100%);
 }
 
 body {
@@ -75,12 +75,13 @@ body {
 
 /* Buttons */
 .btn {
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 10px 16px;
   border: none;
-  border-radius: var(--radius);
+  border-radius: 999px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.2;
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
@@ -93,9 +94,9 @@ body {
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
+  opacity: 0.95;
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 }
 
 .btn-primary:disabled {
@@ -128,7 +129,7 @@ input[type="number"],
 select,
 textarea {
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-family: var(--font-family);
@@ -144,6 +145,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
 }
 
 .form-group {

@@ -1,0 +1,24 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">T-shirt premium bleu marine</title>
+  <desc id="desc">Illustration produit d'un t-shirt premium avec fond degrade.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3f6ff"/>
+      <stop offset="100%" stop-color="#dbe9ff"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c2e5f"/>
+      <stop offset="100%" stop-color="#17264c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="1020" cy="120" r="170" fill="#9fc1ff" opacity="0.35"/>
+  <circle cx="180" cy="790" r="220" fill="#b0cbff" opacity="0.35"/>
+  <g transform="translate(335,160)">
+    <path d="M130 90c24-55 84-90 135-90s111 35 135 90l115 50-56 132-69-35v458H110V237l-69 35L-15 140l115-50z" fill="url(#shirt)"/>
+    <path d="M265 55c-44 0-79 30-90 73h180c-11-43-46-73-90-73z" fill="#10203f"/>
+    <rect x="204" y="225" width="122" height="30" rx="15" fill="#eaf1ff" opacity="0.85"/>
+    <text x="265" y="246" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2e5f">PREMIUM</text>
+  </g>
+  <text x="600" y="840" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#223a72">Sample T-Shirt</text>
+</svg>

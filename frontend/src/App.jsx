@@ -19,11 +19,18 @@ import Products from './components/pages/Products';
 import ProductDetail from './components/pages/ProductDetail';
 import Cart from './components/pages/Cart';
 import Checkout from './components/pages/Checkout';
+import OrderConfirmation from './components/pages/OrderConfirmation';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
+import LegalNotice from './components/pages/LegalNotice';
+import Terms from './components/pages/Terms';
+import Privacy from './components/pages/Privacy';
+import Contact from './components/pages/Contact';
+import ShippingReturnsFaq from './components/pages/ShippingReturnsFaq';
 import AdminDashboard from './components/admin/Dashboard';
 import AdminProducts from './components/admin/Products';
 import AdminOrders from './components/admin/Orders';
+import { Navigate } from 'react-router-dom';
 import './styles/App.css';
 import brandingConfig from './config/branding.json';
 
@@ -50,8 +57,19 @@ function App() {
                 <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-confirmation" element={<OrderConfirmation />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/mentions-legales" element={<LegalNotice />} />
+                <Route path="/cgv" element={<Terms />} />
+                <Route path="/confidentialite" element={<Privacy />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/livraison-retours-faq" element={<ShippingReturnsFaq />} />
+
+                {/* Compatibilité anciennes URLs */}
+                <Route path="/terms" element={<Navigate to="/cgv" replace />} />
+                <Route path="/privacy" element={<Navigate to="/confidentialite" replace />} />
+                <Route path="/faq" element={<Navigate to="/livraison-retours-faq" replace />} />
 
                 {/* Routes admin */}
                 <Route path="/admin" element={<AdminDashboard />} />

@@ -10,7 +10,7 @@
  * - getTotal()
  */
 
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 
 export const CartContext = createContext();
 
@@ -20,40 +20,82 @@ export const CartProvider = ({ children }) => {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [toast, setToast] = useState(null);
 
   // Sauvegarder le panier dans localStorage à chaque modification
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
-  const addToCart = (product, quantity = 1) => {
+  const showToast = useCallback((message, duration = 2400) => {
+    setToast({ message, id: Date.now() });
+    window.setTimeout(() => setToast(null), duration);
+  }, []);
+
+  const openCart = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
+  const toggleCart = () => setIsCartOpen((open) => !open);
+
+  const getVariantKey = (selectedOptions = null) => {
+    if (!selectedOptions || typeof selectedOptions !== 'object') return '';
+    return Object.entries(selectedOptions)
+      .filter(([, value]) => value)
+      .map(([key, value]) => `${key}:${value}`)
+      .join('|');
+  };
+
+  const matchesItem = (item, identifier) => {
+    return item.itemKey === identifier || item.productId === identifier;
+  };
+
+  const addToCart = (product, quantity = 1, options = {}) => {
+    const opts = typeof options === 'boolean' ? { open: options } : options;
+    const {
+      open = false,
+      toast: toastMessage = true,
+      selectedOptions = null
+    } = opts;
+
+    const variantKey = getVariantKey(selectedOptions);
+    const itemKey = `${product._id}::${variantKey || 'default'}`;
+
     setItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.productId === product._id);
+      const existingItem = prevItems.find((item) => item.itemKey === itemKey);
 
       if (existingItem) {
         return prevItems.map((item) =>
-          item.productId === product._id
+          item.itemKey === itemKey
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
 
+      const selectedOptionsLabel = selectedOptions
+        ? Object.values(selectedOptions).filter(Boolean).join(' / ')
+        : '';
+
       return [
         ...prevItems,
         {
+          itemKey,
           productId: product._id,
-          name: product.name,
+          name: selectedOptionsLabel ? `${product.name} (${selectedOptionsLabel})` : product.name,
           price: product.price,
           image: product.images?.[0]?.url,
-          quantity
+          quantity,
+          selectedOptions
         }
       ];
     });
+
+    if (open) openCart();
+    if (toastMessage) showToast(`${product.name} ajouté au panier`);
   };
 
   const removeFromCart = (productId) => {
     setItems((prevItems) =>
-      prevItems.filter((item) => item.productId !== productId)
+      prevItems.filter((item) => !matchesItem(item, productId))
     );
   };
 
@@ -65,7 +107,7 @@ export const CartProvider = ({ children }) => {
 
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item.productId === productId
+        matchesItem(item, productId)
           ? { ...item, quantity }
           : item
       )
@@ -92,7 +134,13 @@ export const CartProvider = ({ children }) => {
       updateQuantity,
       clearCart,
       getTotal,
-      getTotalQuantity
+      getTotalQuantity,
+      isCartOpen,
+      openCart,
+      closeCart,
+      toggleCart,
+      toast,
+      showToast
     }}>
       {children}
     </CartContext.Provider>

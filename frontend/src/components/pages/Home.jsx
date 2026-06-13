@@ -2,26 +2,39 @@
  * HOME PAGE
  * 
  * Page d'accueil avec:
- * - Hero section
- * - Produits en vedette
- * - CTA
+ * - Hero premium
+ * - Produits populaires
+ * - Nouveautés
+ * - Avantages
+ * - Avis clients
  */
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { apiClient } from '../../utils/apiClient';
+import HeroSection from '../home/HeroSection';
+import PopularProductsSection from '../home/PopularProductsSection';
+import NewArrivalsSection from '../home/NewArrivalsSection';
+import FeaturesSection from '../home/FeaturesSection';
+import TestimonialsSection from '../home/TestimonialsSection';
+import { mockProducts } from '../../data/mockProducts';
 import '../../styles/Home.css';
-import brandingConfig from '../../config/branding.json';
 
 const Home = () => {
-  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [popularProducts, setPopularProducts] = useState([]);
+  const [newArrivals, setNewArrivals] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFeaturedProducts = async () => {
+    const fetchHomeData = async () => {
+      setLoading(true);
       try {
-        const data = await apiClient.getProducts({ limit: 6 });
-        setFeaturedProducts(data.products.slice(0, 6));
+        const [popularData, newData] = await Promise.all([
+          apiClient.getProducts({ limit: 6, sort: '-ratings.count' }),
+          apiClient.getProducts({ limit: 6, sort: '-createdAt' })
+        ]);
+
+        setPopularProducts(popularData.products);
+        setNewArrivals(newData.products);
       } catch (error) {
         console.error('Erreur lors du chargement des produits:', error);
       } finally {
@@ -29,64 +42,16 @@ const Home = () => {
       }
     };
 
-    fetchFeaturedProducts();
+    fetchHomeData();
   }, []);
 
   return (
     <div className="home">
-      {/* Hero */}
-      <section className="hero" style={{
-        backgroundColor: brandingConfig.colors.primary
-      }}>
-        <div className="hero-content">
-          <h1>Bienvenue chez {brandingConfig.storeName}</h1>
-          <p>{brandingConfig.storeName_subtitle}</p>
-          <Link to="/products" className="btn btn-light">
-            Découvrir nos produits
-          </Link>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="featured-products">
-        <div className="container">
-          <h2>Produits en vedette</h2>
-          
-          {loading ? (
-            <p className="loading">Chargement...</p>
-          ) : (
-            <div className="products-grid">
-              {featuredProducts.map((product) => (
-                <Link
-                  key={product._id}
-                  to={`/products/${product._id}`}
-                  className="product-card"
-                >
-                  <img
-                    src={product.images?.[0]?.url || '/placeholder.png'}
-                    alt={product.name}
-                    className="product-image"
-                  />
-                  <h3>{product.name}</h3>
-                  <p className="price">{product.price?.toFixed(2)} €</p>
-                  <p className="category">{product.category}</p>
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="cta-section" style={{
-        backgroundColor: brandingConfig.colors.secondary
-      }}>
-        <h2>Prêt à acheter?</h2>
-        <p>Parcourez notre collection complète</p>
-        <Link to="/products" className="btn btn-primary">
-          Voir tous les produits
-        </Link>
-      </section>
+      <HeroSection />
+      <PopularProductsSection products={popularProducts.length ? popularProducts : mockProducts} loading={loading} />
+      <NewArrivalsSection products={newArrivals.length ? newArrivals : mockProducts} loading={loading} />
+      <FeaturesSection />
+      <TestimonialsSection />
     </div>
   );
 };

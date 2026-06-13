@@ -37,7 +37,7 @@ const run = async () => {
           sku: 'TSHIRT-001',
           category: 'vêtements',
           stock: 100,
-          images: [{ url: '/images/placeholder.png', alt: 'T-Shirt' }],
+          images: [{ url: '/images/products/sample-tshirt.svg', alt: 'T-Shirt premium bleu marine' }],
           isActive: true
         },
         {
@@ -47,7 +47,7 @@ const run = async () => {
           sku: 'MUG-001',
           category: 'maison',
           stock: 50,
-          images: [{ url: '/images/placeholder.png', alt: 'Mug' }],
+          images: [{ url: '/images/products/sample-mug.svg', alt: 'Mug céramique premium' }],
           isActive: true
         }
       ];

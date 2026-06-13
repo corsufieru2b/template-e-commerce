@@ -6,7 +6,7 @@
   background-color: var(--secondary-color);
   color: white;
   margin-top: auto;
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-xl) 0 var(--spacing-md);
 }
 
 .footer-container {
@@ -22,11 +22,29 @@
 .footer-section h3 {
   margin-bottom: var(--spacing-md);
   font-size: 16px;
+  letter-spacing: 0.01em;
 }
 
 .footer-section p {
   font-size: 14px;
   line-height: 1.8;
+}
+
+.trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.trust-list li {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+}
+
+.social-title {
+  margin-top: var(--spacing-lg);
 }
 
 .footer-section ul {
@@ -63,5 +81,10 @@
 @media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .footer-bottom {
+    text-align: left;
   }
 }

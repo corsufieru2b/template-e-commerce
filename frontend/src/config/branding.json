@@ -63,6 +63,11 @@
     "twitter": "https://twitter.com/premiumstore",
     "youtube": "https://youtube.com/premiumstore"
   },
+  "badges": {
+    "new": "Nouveau",
+    "sale": "Promo",
+    "bestseller": "Best seller"
+  },
   "shipping": {
     "defaultCost": 9.99,
     "freeShippingThreshold": 100,

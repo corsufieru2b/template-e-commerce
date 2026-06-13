@@ -64,11 +64,47 @@
   width: 60px;
 }
 
-.btn-remove {
-  background: none;
+.cart-qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cart-qty-control button {
   border: none;
+  background: #ffffff;
+  width: 30px;
+  height: 34px;
   cursor: pointer;
   font-size: 16px;
+}
+
+.cart-qty-control input {
+  width: 52px;
+  border: none;
+  text-align: center;
+}
+
+.btn-remove {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-remove:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.cart-items-actions {
+  margin-top: var(--spacing-md);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .cart-summary {
@@ -107,6 +143,25 @@
   margin-bottom: var(--spacing-sm);
 }
 
+.shipping-helper {
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-light);
+}
+
+.cart-trust-points {
+  margin-top: var(--spacing-md);
+  border-top: 1px solid var(--border);
+  padding-top: var(--spacing-md);
+  display: grid;
+  gap: 6px;
+}
+
+.cart-trust-points p {
+  font-size: 0.92rem;
+  color: var(--text-light);
+}
+
 @media (max-width: 768px) {
   .cart-container {
     grid-template-columns: 1fr;
@@ -114,5 +169,47 @@
 
   .cart-summary {
     position: static;
+  }
+
+  .cart-items table,
+  .cart-items thead,
+  .cart-items tbody,
+  .cart-items th,
+  .cart-items td,
+  .cart-items tr {
+    display: block;
+    width: 100%;
+  }
+
+  .cart-items thead {
+    display: none;
+  }
+
+  .cart-items tr {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cart-items td {
+    border: none;
+    padding: var(--spacing-xs) 0;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .cart-items td:first-child {
+    justify-content: flex-start;
+  }
+
+  .cart-items-actions {
+    justify-content: stretch;
+  }
+
+  .cart-items-actions .btn {
+    width: 100%;
   }
 }

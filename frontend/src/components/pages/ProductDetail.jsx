@@ -20,6 +20,8 @@ const ProductDetail = () => {
   const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [loading, setLoading] = useState(true);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -28,6 +30,7 @@ const ProductDetail = () => {
       try {
         const data = await apiClient.getProduct(id);
         setProduct(data.product);
+        setSelectedImageIndex(0);
       } catch (error) {
         console.error('Erreur:', error);
       } finally {
@@ -38,11 +41,30 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
+  const getVariantOptions = (keyName) => {
+    if (!product?.specifications) return [];
+    return product.specifications
+      .filter((spec) => spec.key?.toLowerCase() === keyName.toLowerCase())
+      .map((spec) => spec.value)
+      .filter(Boolean);
+  };
+
+  const colorOptions = getVariantOptions('Couleur');
+  const sizeOptions = getVariantOptions('Taille');
+
+  const handleSelectOption = (key, value) => {
+    setSelectedOptions((prev) => ({ ...prev, [key]: value }));
+  };
+
   const handleAddToCart = () => {
-    addToCart(product, quantity);
+    addToCart(product, quantity, { selectedOptions, open: true, toast: true });
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
   };
+
+  const ratingsAverage = product.ratings?.average || 0;
+  const ratingsCount = product.ratings?.count || 0;
+  const currentImage = product.images?.[selectedImageIndex]?.url || product.images?.[0]?.url || '/images/products/placeholder-product.svg';
 
   if (loading) return <div className="container"><p>Chargement...</p></div>;
   if (!product) return <div className="container"><p>Produit non trouvé</p></div>;
@@ -54,7 +76,7 @@ const ProductDetail = () => {
           {/* Images */}
           <div className="product-images">
             <img
-              src={product.images?.[0]?.url || '/placeholder.png'}
+              src={currentImage}
               alt={product.name}
               className="main-image"
             />
@@ -64,7 +86,8 @@ const ProductDetail = () => {
                   key={idx}
                   src={img.url}
                   alt={`${product.name} ${idx}`}
-                  className="thumbnail"
+                  className={`thumbnail ${selectedImageIndex === idx ? 'thumbnail--active' : ''}`}
+                  onClick={() => setSelectedImageIndex(idx)}
                 />
               ))}
             </div>
@@ -86,7 +109,7 @@ const ProductDetail = () => {
             </div>
 
             <div className="ratings">
-              ⭐ {product.ratings.average} ({product.ratings.count} avis)
+              ⭐ {ratingsAverage.toFixed(1)} ({ratingsCount} avis)
             </div>
 
             <p className="description">{product.description}</p>
@@ -114,6 +137,46 @@ const ProductDetail = () => {
               )}
             </div>
 
+            {(colorOptions.length > 0 || sizeOptions.length > 0) && (
+              <div className="variant-pickers">
+                {colorOptions.length > 0 && (
+                  <div className="variant-row">
+                    <span>Couleur</span>
+                    <div className="variant-values">
+                      {colorOptions.map((color) => (
+                        <button
+                          key={color}
+                          type="button"
+                          className={`variant-chip ${selectedOptions.Couleur === color ? 'variant-chip--active' : ''}`}
+                          onClick={() => handleSelectOption('Couleur', color)}
+                        >
+                          {color}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {sizeOptions.length > 0 && (
+                  <div className="variant-row">
+                    <span>Taille</span>
+                    <div className="variant-values">
+                      {sizeOptions.map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          className={`variant-chip ${selectedOptions.Taille === size ? 'variant-chip--active' : ''}`}
+                          onClick={() => handleSelectOption('Taille', size)}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Actions */}
             <div className="product-actions">
               <div className="quantity-selector">
@@ -127,8 +190,14 @@ const ProductDetail = () => {
                 disabled={product.stock === 0}
                 className="btn btn-primary btn-add-cart"
               >
-                {addedToCart ? '✅ Ajouté au panier!' : '🛒 Ajouter au panier'}
+                {addedToCart ? 'Ajoute au panier' : 'Ajouter au panier'}
               </button>
+            </div>
+
+            <div className="product-meta-lines">
+              <p>SKU: {product.sku || 'N/A'}</p>
+              <p>Livraison estimee: 2 a 5 jours ouvres</p>
+              <p>Paiement securise et retours sous 14 jours</p>
             </div>
           </div>
         </div>

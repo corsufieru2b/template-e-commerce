@@ -113,6 +113,7 @@ router.post('/', authMiddleware, async (req, res, next) => {
         productName: product.name,
         price: product.price,
         quantity: item.quantity,
+        selectedOptions: item.selectedOptions || null,
         subtotal: itemSubtotal
       });
     }
